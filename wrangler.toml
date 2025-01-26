@@ -1,9 +1,0 @@
-# Shared
-[vars]
-NITRO_HELLO_THERE="general"
-SECRET="secret"
-
-# Override values for `--env production` usage
-[env.production.vars]
-NITRO_HELLO_THERE="captain"
-SECRET="top-secret"
