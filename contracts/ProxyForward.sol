@@ -1,12 +1,15 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.24;
-import "@openzeppelin/contracts/access/Ownable.sol";
-
 
 abstract contract ProxyForward {
   address internal agent;
 
-  error InvalidAccount();
+  error UnauthorizedAccess();
+
+  event AgentChanged(
+    address indexed oldAgent,
+    address indexed newAgent
+  );
 
   constructor(address initialAgent) {
     agent = initialAgent;
@@ -14,7 +17,7 @@ abstract contract ProxyForward {
 
   modifier proxy(address signer) {
     if (signer != msg.sender && msg.sender != agent)
-      revert InvalidAccount();
+      revert UnauthorizedAccess();
     _;
   }
 

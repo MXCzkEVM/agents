@@ -6,11 +6,11 @@ import "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
 abstract contract ProxyForwardUpgradeable is Initializable {
   address internal agent;
 
-  error InvalidAccount();
+  error UnauthorizedAccess();
 
   modifier proxy(address signer) {
     if (signer != msg.sender && msg.sender != agent)
-      revert InvalidAccount();
+      revert UnauthorizedAccess();
     _;
   }
 

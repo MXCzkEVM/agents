@@ -1,16 +1,17 @@
 {
-  "name": "moonchain-agent-monorepo",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "name": "@moonchain/trx-agent",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "nitro build",
+    "dev": "nitro dev",
+    "prepare": "nitro prepare",
+    "preview": "node .output/server/index.mjs"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
   "devDependencies": {
-    "@antfu/eslint-config": "^3.16.0",
-    "eslint": "^9.18.0"
+    "dotenv": "^16.4.7",
+    "nitropack": "latest"
+  },
+  "dependencies": {
+    "@openzeppelin/contracts": "^5.2.0",
+    "ethers": "^6.13.5"
   }
 }
