@@ -105,12 +105,22 @@ const receipt = await provider.waitForTransaction(transaction.hash)
 
 Moonchain Transaction Agents do not support direct sending of native tokens and are only applicable for contract-related transactions.
 
+```ts
+import { Contract, Wallet, Transaction, JsonRpcProvider } from 'ethers'
+
+const { data: signMessage } = await fetch('/proof', {
+  // The value field is not supported
+  body: JSON.stringify({ ..., value: 100 }),
+  method: 'POST',
+})
+```
+
 If you need to support sending ERC20 tokens, please modify the ERC20 contract to allow the proxy contract to perform user approvals.
 
 ```sol
 import "@moonchain/agents/contracts/ProxyForward.sol";
 
-contract ERC20 is ProxyForward {
+contract YourERC20Token is ProxyForward {
   constructor(address _agent) ProxyForward(_agent) {}
 
   function approve_proxy(address sender, address spender, uint256 amount) public proxy(sender) {
