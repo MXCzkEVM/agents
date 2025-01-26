@@ -1,5 +1,3 @@
-Here's the translation into English:
-
 ## Moonchain Transaction Agents
 
 Moonchain Transaction Agents is a set of code libraries that can be used for proxy sending on Moonchain or other chains.
