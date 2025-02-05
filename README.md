@@ -17,11 +17,12 @@ Use the following command to clone the repository and install dependencies:
 git clone https://github.com/MXCzkEVM/agent.git
 cd agent
 pnpm install
+pnpm start
 ```
 
 Create a .env file with the following two parameters:
 
-- **NITRO_NETWORK_RPC_URL**: Your RPC address
+- **NETWORK_RPC_URL**: Your RPC address
 - **NITRO_PRIVATE_KEY**: The private key address of the proxy
 
 > Please ensure that the proxy's private key address has sufficient balance to cover transaction fees, and keep the private key secure to prevent theft.
@@ -147,5 +148,5 @@ Use this repository and run the following commands to compile the server and run
 
 ```bash
 pnpm build
-pnpm preview
+pnpm start
 ```
