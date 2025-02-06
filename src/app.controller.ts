@@ -1,7 +1,7 @@
 import { Body, Controller, Logger, Post } from '@nestjs/common';
 import { ApiBody, ApiResponse } from '@nestjs/swagger'
 import { AgentTransactionBody, AgentTransactionResponse, ProofTransactionBody, ProofTransactionResponse } from './dtos';
-import { parseMessage } from './utils';
+import { getSinger, parseMessage } from './utils';
 import { verifyMessage, Interface, JsonRpcProvider, Wallet } from 'ethers';
 @Controller()
 export class AppController {
@@ -24,8 +24,7 @@ export class AppController {
   @ApiBody({ type: AgentTransactionBody, required: true })
   @ApiResponse({ type: AgentTransactionResponse })
   async agent(@Body() body: AgentTransactionBody) {
-    const provider = new JsonRpcProvider(process.env.NETWORK_RPC_URL)
-    const signer = new Wallet(process.env.AGENT_PRIVATE_KEY, provider)
+    const signer = await getSinger()
     const message = await parseMessage(
       body.from,
       body.to,

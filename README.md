@@ -22,16 +22,33 @@ pnpm start
 
 Create a .env file with the following two parameters:
 
-- **NETWORK_RPC_URL**: Your RPC address
-- **NITRO_PRIVATE_KEY**: The private key address of the proxy
+- **NETWORK_RPC**: Your Network RPC url
+- **PRIVATE_KEY**: The private key address of the proxy
 
 > Please ensure that the proxy's private key address has sufficient balance to cover transaction fees, and keep the private key secure to prevent theft.
+
+In addition, You can store the private key in [upstash](https://console.upstash.com/) to ensure its security
+
+![](/public/upstash.jpg)
+
+```sh
+# .env file
+AGENT_NETWORK_RPC = "https://geneva-rpc.moonchain.com"
+AGENT_PRIVATE_KEY = "..."
+
+# OR
+
+AGENT_NETWORK_RPC = "https://geneva-rpc.moonchain.com"
+UPSTASH_REST_URL = "https:...upstash.io"
+UPSTASH_REST_TOKEN = "..."
+```
 
 Use the following script to start the proxy server:
 
 ```bash
 pnpm dev
 ```
+
 
 The server will provide two endpoints:
 
