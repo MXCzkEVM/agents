@@ -1,6 +1,8 @@
-import { resolve } from 'path'
+import { resolve } from 'node:path'
+import process from 'node:process'
 import { createStorage } from 'unstorage'
+import fsDriver from 'unstorage/drivers/fs'
 
 export const storage = createStorage({
-  driver: require('unstorage/drivers/fs')({ base: resolve(process.cwd(), '.cache') }),
+  driver: fsDriver({ base: resolve(process.cwd(), '.cache') }),
 })

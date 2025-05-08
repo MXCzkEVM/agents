@@ -1,39 +1,31 @@
+import type { TransactionDescription } from 'ethers'
 import crypto from 'node:crypto'
-import { TransactionDescription } from "ethers";
-import { storage } from "./storage";
 
 export async function parseMessage(
   from: string,
   to: string,
   parsed: TransactionDescription,
-  next?: boolean
-) {
+  nonce: number,
+): Promise<string> {
   const key = `${from.slice(0, 16)}:nonce`
-  let nonce = await storage.getItem<number>(key) || 0
-  
-  if (next) {
-    nonce++
-    await storage.setItem(key, nonce)
-  }
 
   const inputs = parsed.fragment.inputs.map((input, index) =>
-    ` ${input.name}: ${parsed.args[index]}`
+    ` ${input.name}: ${parsed.args[index]}`,
   )
   const messages = [
-    `From: ${from}`,
-    `Contract: ${to}`,
-    `Params: `,
+    `from: ${from}`,
+    `contract: ${to}`,
+    `params: `,
     ...(inputs.length
-      ? [`Params: `, ...inputs] 
+      ? [`params: `, ...inputs]
       : []),
-    `UNonce: ${generateRandom(`${key}:${nonce}`)}`,
+    `nonce: ${generateRandom(`${key}:${nonce}`)}`,
   ]
 
   return messages.filter(Boolean).join('\n')
 }
 
-
-export function generateRandom(input: string, algorithm = 'sha256') {
+export function generateRandom(input: string, algorithm = 'sha256'): number {
   const hash = crypto.createHash(algorithm)
   hash.update(input)
   const hashValue = hash.digest('hex')
