@@ -15,6 +15,7 @@ export async function parseMessage(
   const messages = [
     `from: ${from}`,
     `contract: ${to}`,
+    `method: ${parsed.name}`,
     `params: `,
     ...(inputs.length
       ? [`params: `, ...inputs]
