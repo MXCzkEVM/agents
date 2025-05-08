@@ -48,7 +48,7 @@ The contracts are located in the `contracts` directory of this repository. You c
 - **`ProxyForward.sol`**: A contract for proxying transactions, ensuring and verifying that transactions are sent only by the proxy or the user themselves.
 - **`ProxyForwardUpgradeable.sol`**: A contract for proxying transactions that supports upgradeable contracts.
 
-```sol
+```solidity
 import "@moonchain/agents/contracts/ProxyForward.sol";
 
 contract Counter is ProxyForward {
