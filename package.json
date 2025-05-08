@@ -19,10 +19,6 @@
       "types": "./dist/index.d.mts",
       "import": "./dist/index.mjs"
     },
-    "./next": {
-      "types": "./dist/next.d.mts",
-      "import": "./dist/next.mjs"
-    },
     "./contracts/*": "./contracts/*",
     "./package.json": "./package.json"
   },
@@ -38,7 +34,7 @@
     "dev": "tsdown --watch",
     "lint": "eslint",
     "prepublishOnly": "nr build",
-    "release": "bumpp && pnpm publish",
+    "release": "bumpp && pnpm publish --access public",
     "start": "tsx src/index.ts",
     "test": "vitest",
     "typecheck": "tsc --noEmit",
