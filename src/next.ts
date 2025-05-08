@@ -1,9 +1,13 @@
+/* eslint-disable ts/ban-ts-comment */
 import type { TransactionDescription } from 'ethers'
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { Interface, JsonRpcProvider, verifyMessage, Wallet } from 'ethers'
-
 import { parseMessage } from './utils'
 
+// @ts-expect-error
+BigInt.prototype.toJSON = function () {
+  return this.toString()
+}
 export interface TransactionAgentsOptions {
   privateKey: string | ((req: NextApiRequest) => string)
   rpc: string | ((req: NextApiRequest) => string)

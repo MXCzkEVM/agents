@@ -69,10 +69,7 @@ This example uses the `Counter.sol` contract written above and utilizes the Agen
 import { agent, proof } from '@moonchain/agents/next'
 import { Contract, JsonRpcProvider, Transaction, Wallet } from 'ethers'
 import abi from './Counter.json'
-// Fix BigInt JSON error
-BigInt.prototype.toJSON = function () {
-  return this.toString()
-}
+
 const provider = new JsonRpcProvider('URL_ADDRESS')
 const user = new Wallet('264a...3492', provider)
 const counter = new Contract('COUNTER_ADDRESS', from, user)
