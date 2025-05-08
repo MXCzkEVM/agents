@@ -5,7 +5,6 @@ export default defineConfig({
   fixedExtension: true,
   entry: [
     'src/index.ts',
-    'src/next.ts',
   ],
   format: ['esm'],
   clean: true,

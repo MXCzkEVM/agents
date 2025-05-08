@@ -26,11 +26,16 @@ Configure routing in the `pages/api/agents` directory of your Next.js project. T
 
 ```ts
 // pages/api/agents/[...path].ts
-import { TransactionAgents } from '@moonchain/agents/next'
+import { TransactionAgents } from '@moonchain/agents'
 
 export default TransactionAgents({
   NETWORK_RPC: process.env.NETWORK_RPC!,
   PRIVATE_KEY: process.env.PRIVATE_KEY!
+})
+// or
+export default TransactionAgents({
+  NETWORK_RPC: req => '...',
+  PRIVATE_KEY: req => '...'
 })
 ```
 
@@ -66,7 +71,7 @@ contract Counter is ProxyForward {
 This example uses the `Counter.sol` contract written above and utilizes the Agents Servers to proxy the sending of transactions.
 
 ```ts
-import { agent, proof } from '@moonchain/agents/next'
+import { agent, proof } from '@moonchain/agents'
 import { Contract, JsonRpcProvider, Transaction, Wallet } from 'ethers'
 import abi from './Counter.json'
 
