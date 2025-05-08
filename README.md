@@ -118,17 +118,8 @@ import "@moonchain/agents/contracts/ProxyForward.sol";
 contract ERC20 is ProxyForward {
   constructor(address _agent) ProxyForward(_agent) {}
 
-  function approve_proxy(address sender, address spender, uint256 amount) public proxy(sender) {
+  function approveProxy(address sender, address spender, uint256 amount) public proxy(sender) {
     _approve(sender, spender, amount);
   }
 }
-```
-
-## Production
-
-Use this repository and run the following commands to compile the server and run the production server:
-
-```bash
-pnpm build
-pnpm start
 ```
