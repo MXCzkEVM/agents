@@ -117,7 +117,7 @@ Moonchain Transaction Agents do not support the direct sending of native tokens 
 
 If you need to support the sending of ERC20 tokens, please modify the ERC20 contract to allow the proxy contract to perform user approvals.
 
-```sol
+```solidity
 import "@moonchain/agents/contracts/ProxyForward.sol";
 
 contract ERC20 is ProxyForward {
