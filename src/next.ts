@@ -27,17 +27,17 @@ export interface TransactionReceipt {
   value: string
 }
 export interface TransactionAgentsOptions {
-  privateKey: string | ((req: NextApiRequest) => string)
-  rpc: string | ((req: NextApiRequest) => string)
+  PRIVATE_KEY: string | ((req: NextApiRequest) => string)
+  NETWORK_RPC: string | ((req: NextApiRequest) => string)
 }
 
 export function TransactionAgents(options: TransactionAgentsOptions) {
   const cache = new Map<string, number>()
 
   function parseOptions(req: NextApiRequest) {
-    const privateKey = typeof options.privateKey === 'function' ? options.privateKey(req) : options.privateKey
-    const rpc = typeof options.rpc === 'function' ? options.rpc(req) : options.rpc
-    return { privateKey, rpc }
+    const PRIVATE_KEY = typeof options.PRIVATE_KEY === 'function' ? options.PRIVATE_KEY(req) : options.PRIVATE_KEY
+    const NETWORK_RPC = typeof options.NETWORK_RPC === 'function' ? options.NETWORK_RPC(req) : options.NETWORK_RPC
+    return { key: PRIVATE_KEY, rpc: NETWORK_RPC }
   }
 
   return async function handler(req: NextApiRequest, res: NextApiResponse<any>) {
@@ -49,9 +49,9 @@ export function TransactionAgents(options: TransactionAgentsOptions) {
     if (!req.body.data)
       return res.status(400).json({ error: 'Missing data' })
 
-    const { privateKey, rpc } = parseOptions(req)
+    const { rpc, key } = parseOptions(req)
     const provider = new JsonRpcProvider(rpc)
-    const signer = new Wallet(privateKey, provider)
+    const signer = new Wallet(key, provider)
     const nonce = cache.get(req.body.from)
     const interf = new Interface([req.body.fragment])
     const parsed = interf.parseTransaction({ data: req.body.data })
